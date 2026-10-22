@@ -1,4 +1,4 @@
-package com.example.p6.View
+package com.example.p6.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,26 +28,24 @@ import com.example.p6.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TampilData(
-    onBackBtnClick: () -> Unit
-) {
+    onBackButtonClick:()-> Unit
+){
     val items = listOf(
         Pair(stringResource(id = R.string.nama_lengkap), "Contoh Nama"),
         Pair(stringResource(id = R.string.jenis_kelamin), "Lainnya"),
         Pair(stringResource(id = R.string.alamat), "Yogyakarta")
     )
-
     Scaffold(modifier = Modifier,
-        topBar = {
+        {
             TopAppBar(
-                title = { Text(text = stringResource(R.string.tampil), color = Color.White) },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = colorResource(id = R.color.teal_700))
+                title = { Text(text = stringResource(id=R.string.tampil), color = Color.White)},
+                colors = TopAppBarDefaults.mediumTopAppBarColors(colorResource(id=R.color.teal_700))
             )
-        }
-    ) { isiRuang ->
-        Column(modifier = Modifier.padding(paddingValues = isiRuang),
+        }){ isiRuang->
+        Column(modifier = Modifier.padding(isiRuang),
             verticalArrangement = Arrangement.SpaceBetween) {
-            Column(modifier = Modifier.padding(all = dimensionResource(R.dimen.padding_medium)),
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))) {
+            Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
+                verticalArrangement = Arrangement.spacedBy (dimensionResource(id=R.dimen.padding_small))) {
                 items.forEach { item ->
                     Column {
                         Text(text = item.first.uppercase(), fontSize = 16.sp)
@@ -55,12 +53,12 @@ fun TampilData(
                     }
                     HorizontalDivider(thickness = 1.dp, color = Color.Cyan)
                 }
-            }
-            Spacer(modifier = Modifier.height(10.dp))
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onBackBtnClick) {
-                Text(text = stringResource(R.string.back))
+                Spacer(modifier = Modifier.height(10.dp))
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onBackButtonClick) {
+                    Text(text = stringResource(id=R.string.back))
+                }
             }
         }
     }
