@@ -21,3 +21,32 @@ enum class Navigasi {
 
 @Composable
 fun DataApp(
+    navController: NavHostController = rememberNavController()
+){
+    Scaffold{ isiRuang->
+        NavHost(
+            navController = navController,
+            startDestination = Navigasi.FormulirSaya.name,
+
+            modifier = Modifier.padding(isiRuang)){
+            composable(route = Navigasi.FormulirSaya.name){
+                FormIsian(
+                    OnSubmitBtnClick = {
+                        navController.navigate(Navigasi.Detail.name)
+                    }
+                )
+            }
+            composable(route = Navigasi.FormulirSaya.name){
+                TampilData(
+                    onBackButtonClick = {cancelAndBackToFormulirSaya(navController)}
+                )
+            }
+        }
+    }
+}
+
+private fun cancelAndBackToFormulirSaya(
+    navController: NavHostController
+){
+    navController.popBackStack(Navigasi.FormulirSaya.name, inclusive = false)
+}
