@@ -28,3 +28,5 @@ import com.example.p6.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TampilData(
+    onBackBtnClick: () -> Unit
+)
