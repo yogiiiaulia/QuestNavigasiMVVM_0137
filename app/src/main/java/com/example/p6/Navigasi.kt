@@ -1,16 +1,15 @@
+
 package com.example.p6
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.p6.view.FormIsian
-import androidx.navigation.compose.composable
 import com.example.p6.view.TampilData
 
 enum class Navigasi {
@@ -18,27 +17,31 @@ enum class Navigasi {
     Detail
 }
 
-
 @Composable
 fun DataApp(
     navController: NavHostController = rememberNavController()
-){
-    Scaffold{ isiRuang->
+) {
+    Scaffold { isiRuang ->
         NavHost(
             navController = navController,
             startDestination = Navigasi.FormulirSaya.name,
-
-            modifier = Modifier.padding(isiRuang)){
-            composable(route = Navigasi.FormulirSaya.name){
+            modifier = Modifier.padding(isiRuang)
+        ) {
+            // Halaman formulir
+            composable(route = Navigasi.FormulirSaya.name) {
                 FormIsian(
                     OnSubmitBtnClick = {
                         navController.navigate(Navigasi.Detail.name)
                     }
                 )
             }
-            composable(route = Navigasi.FormulirSaya.name){
+
+            // Halaman detail
+            composable(route = Navigasi.Detail.name) {
                 TampilData(
-                    onBackButtonClick = {cancelAndBackToFormulirSaya(navController)}
+                    onBackButtonClick = {
+                        cancelAndBackToFormulirSaya(navController)
+                    }
                 )
             }
         }
@@ -47,6 +50,9 @@ fun DataApp(
 
 private fun cancelAndBackToFormulirSaya(
     navController: NavHostController
-){
-    navController.popBackStack(Navigasi.FormulirSaya.name, inclusive = false)
+) {
+    navController.popBackStack(
+        Navigasi.FormulirSaya.name,
+        inclusive = false
+    )
 }
